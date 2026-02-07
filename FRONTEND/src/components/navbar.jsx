@@ -33,7 +33,7 @@ export default function Navbar() {
 
                 <div className="hidden lg:flex items-center gap-8 transition duration-500">
                     {navlinks.map((link) => (
-                        <Link key={link.href} to={link.href} className="hover:text-slate-300 transition">
+                        <Link key={link.path} to={link.path} className="hover:text-slate-300 transition">
                             {link.text}
                         </Link>
                     ))}
@@ -50,7 +50,7 @@ export default function Navbar() {
             </motion.nav>
             <div className={`fixed inset-0 z-[100] bg-black/60 backdrop-blur flex flex-col items-center justify-center text-lg gap-8 lg:hidden transition-transform duration-400 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
                 {navlinks.map((link) => (
-                    <Link key={link.href} to={link.href} onClick={() => setIsMenuOpen(false)}>
+                    <Link key={link.path} to={link.path} onClick={() => setIsMenuOpen(false)}>
                         {link.text}
                     </Link>
                 ))}
