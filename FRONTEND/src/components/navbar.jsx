@@ -40,9 +40,11 @@ export default function Navbar() {
                 </div>
 
                 <div className="hidden lg:block space-x-3">
-                    <button className="hover:bg-slate-300/20 transition px-6 py-2 border border-slate-400 rounded-md active:scale-95">
-                        Login
-                    </button>
+                    <Link to="/auth">
+                        <button className="hover:bg-slate-300/20 transition px-6 py-2 border border-slate-400 rounded-md active:scale-95">
+                            Login
+                        </button>
+                    </Link>
                 </div>
                 <button onClick={() => setIsMenuOpen(true)} className="lg:hidden active:scale-90 transition">
                     <MenuIcon className="size-6.5" />
