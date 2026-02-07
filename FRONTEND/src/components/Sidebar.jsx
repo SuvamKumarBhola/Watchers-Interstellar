@@ -10,9 +10,8 @@ const Sidebar = () => {
     const navItems = [
         { icon: <LayoutDashboard size={20} />, label: 'Dashboard', path: '/dashboard' },
         { icon: <List size={20} />, label: 'Watchlist', path: '/watchlist' },
-        { icon: <Bell size={20} />, label: 'Alerts', path: '#' },
-        { icon: <Clock size={20} />, label: 'Recent History', path: '#' },
-        { icon: <Palette size={20} />, label: 'UI Kit', path: '#' },
+        { icon: <Bell size={20} />, label: 'Alerts', path: '/alerts' },
+        { icon: <Clock size={20} />, label: 'Recent History', path: '/recent-history' },
     ];
 
     return (
