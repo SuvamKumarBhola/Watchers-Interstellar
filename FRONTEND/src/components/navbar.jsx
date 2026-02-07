@@ -1,65 +1,71 @@
-import { useState } from "react";
-import { MenuIcon, XIcon } from "lucide-react";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Rocket, User, LogOut } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
-export default function Navbar() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const navlinks = [
-        {
-            path: "/",
-            text: "Home",
-        },
-        {
-            path: "/about",
-            text: "About",
-        },
-        {
-            path: "/dashboard",
-            text: "Dashboard",
-        },
-    ];
+const Navbar = () => {
+    const { currentUser, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
+
     return (
-        <>
-            <motion.nav className="sticky top-0 z-50 flex items-center justify-between w-full h-18 px-6 md:px-16 lg:px-24 xl:px-32 backdrop-blur"
-                initial={{ y: -100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 250, damping: 70, mass: 1 }}
-            >
-                <a href="https://prebuiltui.com?utm_source=agentix">
-                    <img className="h-9 w-auto" src="/assets/logo.svg" width={138} height={36} alt="logo" />
-                </a>
-
-                <div className="hidden lg:flex items-center gap-8 transition duration-500">
-                    {navlinks.map((link) => (
-                        <Link key={link.path} to={link.path} className="hover:text-slate-300 transition">
-                            {link.text}
-                        </Link>
-                    ))}
-                </div>
-
-                <div className="hidden lg:block space-x-3">
-                    <Link to="/auth">
-                        <button className="hover:bg-slate-300/20 transition px-6 py-2 border border-slate-400 rounded-md active:scale-95">
-                            Login
+        <nav className="glass-panel" style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            zIndex: 1000,
+            padding: '1rem 2rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+        }}>
+            <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.5rem', fontWeight: 'bold', textDecoration: 'none', color: 'inherit' }}>
+                <Rocket size={24} color="var(--accent-purple)" />
+                <span className="glow-text">Cosmic Watch</span>
+            </Link>
+            <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                <Link to="/" className="nav-link">Home</Link>
+                <Link to="/about" className="nav-link">About</Link>
+                <Link to="/dashboard" className="nav-link">Dashboard</Link>
+                {currentUser ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-primary)', fontWeight: '500' }}>
+                            <div style={{ padding: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '50%', display: 'flex' }}>
+                                <User size={18} />
+                            </div>
+                            <span>{currentUser.firstname || currentUser.name || currentUser.email}</span>
+                        </div>
+                        <button
+                            onClick={handleLogout}
+                            style={{
+                                background: 'transparent',
+                                border: '1px solid rgba(255,255,255,0.2)',
+                                color: 'var(--text-secondary)',
+                                padding: '8px',
+                                borderRadius: '8px',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                transition: 'all 0.2s'
+                            }}
+                            title="Logout"
+                            onMouseOver={(e) => { e.currentTarget.style.borderColor = 'var(--accent-color)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
+                            onMouseOut={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
+                        >
+                            <LogOut size={16} />
                         </button>
-                    </Link>
-                </div>
-                <button onClick={() => setIsMenuOpen(true)} className="lg:hidden active:scale-90 transition">
-                    <MenuIcon className="size-6.5" />
-                </button>
-            </motion.nav>
-            <div className={`fixed inset-0 z-[100] bg-black/60 backdrop-blur flex flex-col items-center justify-center text-lg gap-8 lg:hidden transition-transform duration-400 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
-                {navlinks.map((link) => (
-                    <Link key={link.path} to={link.path} onClick={() => setIsMenuOpen(false)}>
-                        {link.text}
-                    </Link>
-                ))}
-                <button onClick={() => setIsMenuOpen(false)} className="active:ring-3 active:ring-white aspect-square size-10 p-1 items-center justify-center bg-slate-100 hover:bg-slate-200 transition text-black rounded-md flex">
-                    <XIcon />
-                </button>
+                    </div>
+                ) : (
+                    <Link to="/login" className="btn-primary" style={{ padding: '8px 16px' }}>Login</Link>
+                )}
             </div>
-        </>
+        </nav>
     );
-}
+};
+
+export default Navbar;
