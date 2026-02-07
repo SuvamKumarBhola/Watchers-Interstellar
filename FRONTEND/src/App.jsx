@@ -5,6 +5,7 @@ import Features from "./sections/why-cosmic-watch";
 import HeroSection from "./sections/hero-section";
 import Carousul from "./sections/feature-preview";
 import About from "./pages/About";
+import Dashboard from "./pages/Dashboard";
 import { Routes, Route } from "react-router-dom";
 
 export default function Page() {
@@ -24,7 +25,7 @@ export default function Page() {
                     }
                 />
                 <Route path="/about" element={<About />} />
-                {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+                <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
             <Footer />
         </>
