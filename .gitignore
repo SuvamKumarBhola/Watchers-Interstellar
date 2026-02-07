@@ -1,0 +1,64 @@
+# =========================
+# OS & Editor junk
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# =========================
+# Node dependencies
+# =========================
+node_modules/
+
+# =========================
+# Environment variables (CRITICAL)
+# =========================
+.env
+.env.local
+.env.development
+.env.production
+
+# =========================
+# Build outputs
+# =========================
+dist/
+build/
+out/
+
+# =========================
+# Frontend specific (React / Vite / Next)
+# =========================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env*
+
+# =========================
+# Backend specific (Node / Express / FastAPI etc.)
+# =========================
+backend/node_modules/
+backend/dist/
+backend/build/
+backend/.env*
+
+# =========================
+# Cache folders
+# =========================
+.cache/
+.npm/
+.pnpm-store/
+
+# =========================
+# Docker
+# =========================
+docker-data/
