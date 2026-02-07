@@ -8,6 +8,10 @@ import About from "./pages/About";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import { Routes, Route, useLocation } from "react-router-dom";
+import AsteroidDetails from "./pages/AsteroidDetails";
+import Watchlist from "./pages/Watchlist";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 export default function Page() {
     const location = useLocation();
@@ -31,6 +35,12 @@ export default function Page() {
                 <Route path="/about" element={<About />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/asteroid/:id" element={<AsteroidDetails />} />
+                <Route path="/watchlist" element={<Watchlist />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
             </Routes>
             {!isAuthPage && <Footer />}
         </>
